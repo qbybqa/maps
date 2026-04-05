@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Distance Measure</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="map"></div>
+    
+    <div class="panel glass-panel">
+        <div class="panel-header">
+            <h1>Ukur Jarak Peta</h1>
+            <p class="subtitle">Pilih mode pengukuran atau pelacakan.</p>
+            
+            <div class="mode-switch">
+                <button class="mode-btn active" id="modeManual">Manual</button>
+                <button class="mode-btn" id="modeGps">GPS Live</button>
+            </div>
+        </div>
+        <div class="panel-content">
+            <div class="distance-display">
+                <div class="distance-value" id="distanceValue">0.00</div>
+                <div class="distance-unit" id="distanceUnit">km</div>
+            </div>
+            <p id="instructionText" class="instruction">Menunggu titik pertama...</p>
+        </div>
+        <div class="panel-footer">
+            <button id="resetBtn" class="btn btn-primary" disabled>Reset Pengukuran</button>
+            <button id="startTrackBtn" class="btn btn-success" style="display: none;">Mulai Tracking</button>
+            <button id="stopTrackBtn" class="btn btn-danger" style="display: none;">Berhenti</button>
+        </div>
+    </div>
+
+    <!-- Locate GPS Button -->
+    <button id="locateBtn" class="locate-btn" title="Temukan Lokasi Saya">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v2M12 20v2M2 12h2M20 12h2"></path>
+            <circle cx="12" cy="12" r="7"></circle>
+            <circle cx="12" cy="12" r="2"></circle>
+        </svg>
+    </button>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="script.js"></script>
+</body>
+</html>

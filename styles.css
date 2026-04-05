@@ -1,0 +1,270 @@
+:root {
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+    --bg-glass: rgba(15, 23, 42, 0.85);
+    --border-glass: rgba(255, 255, 255, 0.1);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #000; /* fallback */
+    overflow: hidden; /* prevent scrolling */
+    color: var(--text-main);
+}
+
+#map {
+    width: 100vw;
+    height: 100vh;
+    z-index: 1; /* keep map under panel */
+}
+
+/* Glassmorphism Panel */
+.panel {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 340px;
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-glass);
+    border-radius: 16px;
+    padding: 24px;
+    z-index: 1000; /* Above Leaflet map */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.panel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+.panel-header {
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-glass);
+    padding-bottom: 16px;
+}
+
+.panel-header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    background: linear-gradient(to right, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.mode-switch {
+    display: flex;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 4px;
+    border: 1px solid var(--border-glass);
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mode-btn:hover {
+    color: var(--text-main);
+}
+
+.mode-btn.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.panel-content {
+    margin-bottom: 24px;
+}
+
+.distance-display {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.distance-value {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.distance-unit {
+    font-size: 16px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.instruction {
+    font-size: 14px;
+    color: var(--primary);
+    background: rgba(59, 130, 246, 0.1);
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: inline-block;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    transition: all 0.3s ease;
+}
+
+.panel-footer {
+    display: flex;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+    transform: scale(1.02);
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.btn:disabled {
+    background-color: rgba(255,255,255,0.1);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.btn-success {
+    background-color: #10b981; /* emerald-500 */
+    color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+    background-color: #059669; /* emerald-600 */
+    transform: scale(1.02);
+}
+
+.btn-danger {
+    background-color: #ef4444; /* red-500 */
+    color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background-color: #dc2626; /* red-600 */
+    transform: scale(1.02);
+}
+
+.pulse-animation {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+}
+
+/* Custom Marker CSS for Leaflet (optional tweaking) */
+.custom-div-icon {
+    background: transparent;
+    border: none;
+}
+.marker-pin {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    position: relative;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+    border: 3px solid white;
+    cursor: grab;
+}
+.marker-pin::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid var(--primary);
+}
+
+/* Locate Button */
+.locate-btn {
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-glass);
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.locate-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 15px 30px -5px rgba(59, 130, 246, 0.6);
+}
+
+.locate-btn:active {
+    transform: translateY(0) scale(0.95);
+}
